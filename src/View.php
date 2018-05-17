@@ -26,7 +26,7 @@ class View
     // 渲染模板
     public static function render($tpl, $params = [])
     {
-        self::$filename = MYF_ROOT . $tpl;
+        self::$filename = MYF_ROOT . $tpl . '.php';
         self::$params = $params;
         return self::loadTpl();
     }
