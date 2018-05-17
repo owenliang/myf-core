@@ -9,5 +9,10 @@
             "email": "120848369@qq.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "myf\\": "src"
+        }
+    },
     "require": {}
 }
