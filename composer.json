@@ -1,0 +1,13 @@
+{
+    "name": "myf/core",
+    "description": "my framework core",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "owenliang",
+            "email": "120848369@qq.com"
+        }
+    ],
+    "require": {}
+}
