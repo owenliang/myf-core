@@ -30,4 +30,10 @@ class View
         self::$params = $params;
         return self::loadTpl();
     }
+
+    // HTML实体转义方法
+    public static function encode($text)
+    {
+        return htmlspecialchars($text, ENT_QUOTES | ENT_HTML401);
+    }
 }
