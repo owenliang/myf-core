@@ -18,6 +18,8 @@ class App
 
         self::setDebug();
 
+        self::exceptionHandler(null, false);
+
         spl_autoload_register([get_class(), 'autoload']);
 
         self::route();
@@ -28,6 +30,19 @@ class App
     {
         $classPath = MYF_ROOT . '/' . str_replace('\\', '/', $class) . '.php';
         require $classPath;
+    }
+
+    // 异常处理
+    public static function exceptionHandler($exception, $callback = true)
+    {
+        if ($callback) {
+            @http_response_code(500);
+            if (!empty(self::$config['debug'])) {
+                echo $exception;
+            }
+        } else {
+            set_exception_handler([get_class(), 'exceptionHandler']);
+        }
     }
 
     // 初始化PHP报错配置
@@ -53,6 +68,8 @@ class App
         } else {
             $uri = strtolower($_SERVER['REQUEST_URI']);
         }
+
+        $uri = rtrim($uri, '/');
 
         $r = [];  // controller, action
         $p = []; // param1, param2, ....
