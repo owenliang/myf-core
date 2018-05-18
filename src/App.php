@@ -1,5 +1,6 @@
 <?php
 namespace myf;
+use myf\exception\RouteException;
 
 /**
  * Class App
@@ -66,15 +67,15 @@ class App
             global $argv;
             $uri = isset($argv[1]) ? $argv[1] : '';
         } else {
-            $uri = strtolower($_SERVER['REQUEST_URI']);
+            $uri = strtolower(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         }
-
+        
         $uri = rtrim($uri, '/');
 
         $r = [];  // controller, action
         $p = []; // param1, param2, ....
 
-        if (array_key_exists($uri, self::$config['route']['static'])) {
+        if (array_key_exists($uri, self::$config['route']['static'])) { 
             $r = self::$config['route']['static'][$uri];
         } else if (!$isCli) {
             foreach (self::$config['route']['regex'] as $rule) {
@@ -99,6 +100,8 @@ class App
 
             $controller = new $controller();
             call_user_func_array([$controller, $action], $arguments);
+        } else {
+            throw new RouteException('Route Not Found');
         }
     }
 }

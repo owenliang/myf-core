@@ -6,7 +6,7 @@ namespace myf;
  * @package myf
  *
  * Redis(集群)客户端
- *
+ * 
  * redis因为命令相对复杂, 不适合实现读写分离, 需使用方明确获取master/slave连接
  */
 class Redis
