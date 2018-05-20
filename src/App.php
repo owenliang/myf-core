@@ -30,7 +30,9 @@ class App
     public static function autoload($class)
     {
         $classPath = MYF_ROOT . '/' . str_replace('\\', '/', $class) . '.php';
-        require $classPath;
+        if (is_file($classPath) && is_readable($classPath)) {
+            require_once $classPath;
+        }
     }
 
     // 异常处理
