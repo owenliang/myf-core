@@ -14,5 +14,7 @@
             "myf\\": "src"
         }
     },
-    "require": {}
+    "require": {
+        "ongr/elasticsearch-dsl": "^5.0"
+    }
 }

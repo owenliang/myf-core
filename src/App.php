@@ -30,7 +30,9 @@ class App
     public static function autoload($class)
     {
         $classPath = MYF_ROOT . '/' . str_replace('\\', '/', $class) . '.php';
-        require $classPath;
+        if (is_file($classPath) && is_readable($classPath)) {
+            require_once $classPath;
+        }
     }
 
     // 异常处理
@@ -75,9 +77,9 @@ class App
         $r = [];  // controller, action
         $p = []; // param1, param2, ....
 
-        if (array_key_exists($uri, self::$config['route']['static'])) { 
+        if (!empty(self::$config['route']['static']) && array_key_exists($uri, self::$config['route']['static'])) {
             $r = self::$config['route']['static'][$uri];
-        } else if (!$isCli) {
+        } else if (!empty(self::$config['route']['regex']) && !$isCli) {
             foreach (self::$config['route']['regex'] as $rule) {
                 $pattern = '#' . $rule[0] . '#i';
                 $params = [];
