@@ -43,6 +43,10 @@ MYSQL主从分离客户端，PDO库的封装
 
 Redis主从/集群客户端，Phpredis库的封装
 
+### myf\Elasticsearch
+
+Elasticsearch客户端，官方库的封装
+
 ### myf\Exception\...
 
 自定义异常类
