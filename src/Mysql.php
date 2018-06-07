@@ -119,6 +119,9 @@ class Mysql
             } else if (is_int($value)) {
                 $dataType = \PDO::PARAM_INT;
             }
+            if (is_numeric($name)) {
+                $name = $name + 1;
+            }
             $stmt->bindValue($name, $value, $dataType);
         }
         $result = $stmt->execute();
